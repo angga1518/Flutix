@@ -15,6 +15,7 @@ class Flutix extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               RaisedButton(
                 onPressed: () async {
@@ -31,6 +32,18 @@ class Flutix extends StatelessWidget {
                   }
                 },
                 child: Text("Sign Up"),
+              ),
+              RaisedButton(
+                onPressed: () async {
+                  SignInSignUpResult result =
+                      await AuthServices.signIn("aa@aa.aa", "angga01110");
+                  if (result.pengguna != null) {
+                    print(result.pengguna);
+                  } else {
+                    print(result.message);
+                  }
+                },
+                child: Text("Sign In"),
               )
             ],
           ),
