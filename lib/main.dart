@@ -1,54 +1,32 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutix/bloc/blocs.dart';
 import 'package:flutix/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+import 'ui/pages/pages.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(Flutix());
 }
 
 class Flutix extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RaisedButton(
-                onPressed: () async {
-                  SignInSignUpResult result = await AuthServices.signUp(
-                      "aa@aa.aa",
-                      "angga0110",
-                      "angga",
-                      ["ayam", "Goreng"],
-                      "English");
-                  if (result.pengguna != null) {
-                    print("masuk pengguna: $result");
-                  } else {
-                    print(result.message);
-                  }
-                },
-                child: Text("Sign Up"),
-              ),
-              RaisedButton(
-                onPressed: () async {
-                  SignInSignUpResult result =
-                      await AuthServices.signIn("aa@aa.aa", "angga01110");
-                  if (result.pengguna != null) {
-                    print(result.pengguna);
-                  } else {
-                    print(result.message);
-                  }
-                },
-                child: Text("Sign In"),
-              )
-            ],
+    return StreamProvider.value(
+        value: AuthServices.userStream,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<PageBloc>(
+              create: (context) => PageBloc(),
+            ),
+          ],
+          child: MaterialApp(
+            home: Wrapper(),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

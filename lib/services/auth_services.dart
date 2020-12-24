@@ -18,9 +18,12 @@ class AuthServices {
       return SignInSignUpResult(null, e.toString());
     }
   }
-  static Future<SignInSignUpResult> signIn(String email, String password) async{
+
+  static Future<SignInSignUpResult> signIn(
+      String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       Pengguna pengguna = await userCredential.user.fromFirebase();
       return SignInSignUpResult(pengguna, null);
     } catch (e) {
@@ -28,22 +31,21 @@ class AuthServices {
     }
   }
 
-  static Future<void> signOut() async{
+  static Future<void> signOut() async {
     await _auth.signOut();
   }
+
+  static Stream<User> get userStream => _auth.authStateChanges();
 }
 
 class SignInSignUpResult {
   Pengguna _pengguna;
   String _message;
-  SignInSignUpResult(Pengguna pengguna, String message){
+  SignInSignUpResult(Pengguna pengguna, String message) {
     _pengguna = pengguna;
     _message = message;
   }
 
   Pengguna get pengguna => _pengguna;
   String get message => _message.split("]")[1].substring(1);
-
-
-
 }
