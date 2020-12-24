@@ -23,6 +23,9 @@ class Flutix extends StatelessWidget {
             BlocProvider<PageBloc>(
               create: (context) => PageBloc(),
             ),
+            BlocProvider<UserBloc>(
+              create: (context) => UserBloc(),
+            ),
           ],
           child: MaterialApp(
             home: Wrapper(),

@@ -5,6 +5,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context);
     PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
+    UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     if (user == null) {
       if (!(prevPageEvent is GoToSplashPage)) {
         prevPageEvent = GoToSplashPage();
@@ -14,6 +15,7 @@ class Wrapper extends StatelessWidget {
       if (!(prevPageEvent is GoToMainPage)) {
         prevPageEvent = GoToMainPage();
         pageBloc.add(prevPageEvent);
+        userBloc.add(LoadUser(user.uid));
       }
     }
     return BlocBuilder<PageBloc, PageState>(
