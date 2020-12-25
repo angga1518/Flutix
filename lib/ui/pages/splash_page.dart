@@ -5,6 +5,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: defaultMargin),
         child: Center(

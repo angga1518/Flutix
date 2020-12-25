@@ -19,17 +19,24 @@ class Flutix extends StatelessWidget {
     return StreamProvider.value(
         value: AuthServices.userStream,
         child: MultiBlocProvider(
-          providers: [
-            BlocProvider<PageBloc>(
-              create: (context) => PageBloc(),
-            ),
-            BlocProvider<UserBloc>(
-              create: (context) => UserBloc(),
-            ),
-          ],
-          child: MaterialApp(
-            home: Wrapper(),
-          ),
-        ));
+            providers: [
+              BlocProvider<PageBloc>(
+                create: (context) => PageBloc(),
+              ),
+              BlocProvider<UserBloc>(
+                create: (context) => UserBloc(),
+              ),
+              BlocProvider<ThemeBloc>(
+                create: (context) => ThemeBloc(),
+              ),
+            ],
+            child: BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (context, state) {
+                return MaterialApp(
+                  theme: state.themeData,
+                  home: Wrapper(),
+                );
+              },
+            )));
   }
 }
