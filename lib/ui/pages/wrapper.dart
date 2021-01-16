@@ -28,6 +28,8 @@ class Wrapper extends StatelessWidget {
           return SignUpPage(state.registrationData);
         } else if (state is OnPreferencePage) {
           return PreferencePage(state.registrationData);
+        } else if (state is OnAccountConfirmationPage) {
+          return AccountConfirmationPage(state.registrationData);
         } else {
           return MainPage();
         }

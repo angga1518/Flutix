@@ -13,5 +13,11 @@ class LoadUser extends UserEvent {
   LoadUser(this.id);
 }
 
-class SignOut extends UserEvent {
+class SignOut extends UserEvent {}
+
+class UpdateData extends UserEvent {
+  final String name;
+  final String profileImage;
+
+  UpdateData({this.name, this.profileImage});
 }

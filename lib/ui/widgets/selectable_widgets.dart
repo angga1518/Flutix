@@ -20,7 +20,11 @@ class SelectableBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: (onTap != null) ? onTap() : null,
+        onTap: (){
+          if (onTap != null) {
+            onTap();
+          }
+        }, 
         child: Container(
           width: width,
           height: height,

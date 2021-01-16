@@ -14,7 +14,14 @@ class MoviePage extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(defaultMargin, 20, defaultMargin, 30),
           child: BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
-              if (state is UserLoaded) {
+              UserBloc userBloc = BlocProvider.of<UserBloc>(context);
+              if (state is UserLoaded || state is UpdatedUserLoaded) {
+                if (imageFileToUpload != null) {
+                  uploadImage(imageFileToUpload).then((downloadURL) {
+                    imageFileToUpload = null;
+                    userBloc.add(UpdateData(profileImage: downloadURL));
+                  });
+                }
                 return Row(
                   children: [
                     Container(

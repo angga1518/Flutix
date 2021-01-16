@@ -1,7 +1,9 @@
 part of 'user_bloc.dart';
 
 abstract class UserState extends Equatable {
-  const UserState();
+  Pengguna pengguna;
+
+  UserState();
 
   @override
   List<Object> get props => [];
@@ -10,7 +12,13 @@ abstract class UserState extends Equatable {
 class UserInitial extends UserState {}
 
 class UserLoaded extends UserState {
-  final Pengguna pengguna;
+  UserLoaded(Pengguna pengguna){
+    super.pengguna = pengguna;
+  }
+}
 
-  UserLoaded(this.pengguna);
+class UpdatedUserLoaded extends UserState {
+  UpdatedUserLoaded(Pengguna pengguna){
+    super.pengguna = pengguna;
+  }
 }
