@@ -32,6 +32,9 @@ class Flutix extends StatelessWidget {
               BlocProvider<MovieBloc>(
                 create: (context) => MovieBloc()..add(FetchMovies()),
               ),
+              BlocProvider<TicketBloc>(
+                create: (context) => TicketBloc(),
+              ),
             ],
             child: BlocBuilder<ThemeBloc, ThemeState>(
               builder: (context, state) {

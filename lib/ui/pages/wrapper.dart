@@ -30,6 +30,16 @@ class Wrapper extends StatelessWidget {
           return PreferencePage(state.registrationData);
         } else if (state is OnAccountConfirmationPage) {
           return AccountConfirmationPage(state.registrationData);
+        } else if (state is OnMoviePage) {
+          return MovieDetailPage(state.movie);
+        } else if (state is OnSelectSchedulePage) {
+          return SelectSchedulePage(state.movieDetail);
+        } else if (state is OnSelectSeatPage) {
+          return SelectSeatPage(state.ticket);
+        } else if (state is OnCheckoutPage) {
+          return CheckoutPage(state.ticket);
+        } else if (state is OnSuccessPage) {
+          return SuccessPage(state.ticket, state.transaction);
         } else {
           return MainPage();
         }

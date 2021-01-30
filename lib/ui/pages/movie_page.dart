@@ -3,6 +3,7 @@ part of 'pages.dart';
 class MoviePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
     return ListView(
       children: [
         // Header
@@ -115,7 +116,9 @@ class MoviePage extends StatelessWidget {
                           right: (index == movies.length - 1)
                               ? defaultMargin
                               : 16),
-                      child: MovieCard(movies[index]),
+                      child: MovieCard(movies[index], onTap: () {
+                        pageBloc.add(GoToMovieDetailPage(movies[index]));
+                      }),
                     );
                   },
                 );
@@ -204,13 +207,17 @@ class MoviePage extends StatelessWidget {
           ),
         ),
         Column(
-          children: dummyPromos.map((e) => Padding(
-            padding: EdgeInsets.fromLTRB(defaultMargin, 0, defaultMargin, 16),
-            child: PromoCard(e))).toList(),
+          children: dummyPromos
+              .map((e) => Padding(
+                  padding:
+                      EdgeInsets.fromLTRB(defaultMargin, 0, defaultMargin, 16),
+                  child: PromoCard(e)))
+              .toList(),
         ),
 
-
-        SizedBox(height: 75,)
+        SizedBox(
+          height: 75,
+        )
       ],
     );
   }
