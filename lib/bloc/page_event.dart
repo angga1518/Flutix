@@ -54,3 +54,12 @@ class GoToSuccessPage extends PageEvent {
 
   GoToSuccessPage(this.ticket, this.transaction);
 }
+
+class GoToTicketDetailPage extends PageEvent {
+  final Ticket ticket;
+
+  GoToTicketDetailPage(this.ticket);
+}
+
+class GoToProfilePage extends PageEvent {
+}
