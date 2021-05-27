@@ -46,6 +46,8 @@ class Wrapper extends StatelessWidget {
           return TicketDetailPage(state.ticket);
         } else if (state is OnProfilePage) {
           return ProfilePage();
+        } else if (state is OnTopUpPage) {
+          return TopUpPage(state.pageEvent);
         } else {
           return MainPage();
         }

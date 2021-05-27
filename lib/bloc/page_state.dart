@@ -63,5 +63,10 @@ class OnTicketDetailPage extends PageState {
   OnTicketDetailPage(this.ticket);
 }
 
-class OnProfilePage extends PageState {
+class OnProfilePage extends PageState {}
+
+class OnTopUpPage extends PageState {
+  final PageEvent pageEvent;
+
+  OnTopUpPage(this.pageEvent);
 }

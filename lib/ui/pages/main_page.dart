@@ -19,6 +19,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     UserBloc userBloc = BlocProvider.of<UserBloc>(context);
+    PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
     return Scaffold(
         body: Stack(
       children: [
@@ -35,10 +36,7 @@ class _MainPageState extends State<MainPage> {
               bottomNavigationBarIndex = index;
             });
           },
-          children: <Widget>[
-            MoviePage(),
-            TicketPage()
-          ],
+          children: <Widget>[MoviePage(), TicketPage()],
         ),
         customBottomNavBar(),
         Align(
@@ -49,8 +47,7 @@ class _MainPageState extends State<MainPage> {
             margin: EdgeInsets.only(bottom: 42),
             child: FloatingActionButton(
                 onPressed: () {
-                  userBloc.add(SignOut());
-                  AuthServices.signOut();
+                  pageBloc.add(GoToTopUpPage(GoToMainPage()));
                 },
                 backgroundColor: accentColor2,
                 elevation: 0,
